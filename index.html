@@ -32,6 +32,14 @@
             margin-bottom: 50px;
           }
         </style>
+        var aAudio = new Audio('song1.mp3');
+        function toggleAudio() {
+            if (aAudio.paused) {
+                aAudio.play();
+            } else {
+                aAudio.pause();
+            }
+        }
 </head>
 <body>
 <center>
