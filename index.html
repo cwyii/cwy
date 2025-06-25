@@ -39,9 +39,12 @@
         </style>
 </head>
 <body>
-<center><video autoplay playsinline>
-  <source src="CLANKER.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video></center>
+<center>
+  <div dangerouslySetInnerHTML={{ __html: `
+    <video class="video-js" playsinline autoplay loop>
+        <source src="../CLANKER.mp4" type="video/mp4"/>
+    </video>`}}
+/>
+</center>
 </body>
 </html>
