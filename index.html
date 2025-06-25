@@ -37,28 +37,11 @@
             cursor: pointer;
         }
         </style>
-        <script>
-        Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
-get: function () {
-    return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
-}});
-</script>
 </head>
 <body>
 <center><video autoplay playsinline>
   <source src="CLANKER.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video></center>
-$('body').on('click touchstart', function () {
-        const videoElement = document.getElementById('CLANKER');
-        if (videoElement.playing) {
-            // video is already playing so do nothing
-        }
-        else {
-            // video is not playing
-            // so play video now
-            videoElement.play();
-        }
-});
 </body>
 </html>
