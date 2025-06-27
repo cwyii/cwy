@@ -42,9 +42,15 @@
 <body>
 <center><b><h1>PRESS PLAY TO GET ↓RETARDED↓ </h1></b></center>
 <center>
-<audio id="player" controls>
-  <source src="04retard.mp3" type="audio/mp3" />
-</audio>
+  <!-- Fix height and prevent audio layout shift -->
+  <div style="display: inline-block; height: 40px; overflow: hidden;">
+    <audio id="player" controls style="height: 40px;">
+      <source src="04retard.mp3" type="audio/mp3" />
+    </audio>
+  </div>
+
+  <!-- Upside-down arrow below the player -->
+  <div style="font-size: 50px; transform: rotate(180deg); margin-top: 10px; line-height: 1;">↓</div>
 </center>
 </body>
 </html>
