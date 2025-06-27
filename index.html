@@ -64,6 +64,23 @@
 
   <!-- Upside-down arrow below the player -->
   <div style="font-size: 50px; transform: rotate(180deg); margin-top: 10px; line-height: 1;">↓</div>
+<center>
+  <div style="display: inline-block; height: 40px; overflow: hidden;">
+    <audio id="player" controls style="height: 40px;">
+      <source src="04retard.mp3" type="audio/mp3" />
+    </audio>
+  </div>
+
+  <div id="arrow" class="arrow">↓</div>
 </center>
+
+<script>
+  const audio = document.getElementById('player');
+  const arrow = document.getElementById('arrow');
+
+  audio.addEventListener('play', () => {
+    arrow.classList.add('flipped');
+  });
+</script>
 </body>
 </html>
