@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LET'S GET RETARDED</title>
-    
-    <!-- Meta Tags -->
-    <meta name="title" content="CLANKERETARDED">
-    <meta property="og:image" content="JABBA.jpg">
-    <meta property="og:image:type" content="image/jpg">
-    <meta property="og:image:width" content="1080">
-    <meta property="og:image:height" content="1080">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <title>LET'S GET RETARDED</title>
+  
+  <!-- Meta Tags -->
+  <meta name="title" content="CLANKERETARDED">
+  <meta property="og:image" content="JABBA.jpg">
+  <meta property="og:image:type" content="image/jpg">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1080">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Styles -->
-    <style>
-        body {
-            background-color: #0D330A;
-            color: #00F40A;
-            font-family: -apple-system, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        hr {
-            position: relative;
-            top: 20px;
-            border: none;
-            height: 25px;
-            background: #080807;
-            margin-bottom: 50px;
-        }
-        .image1 {
-            width: 30px;
-            height: 30px;
-            display: block;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-        <style>
-    .arrow {
-        font-size: 50px;
-        margin-top: 10px;
-        transition: all 0.4s ease;
-        color: #00F40A;
+  <!-- Styles -->
+  <style>
+    body {
+      background-color: #0D330A;
+      color: #00F40A;
+      font-family: -apple-system, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
 
-    .arrow.flipped {
-        transform: rotate(180deg);
-        color: #B22222; /* A strong but classy dark red */
+    hr {
+      position: relative;
+      top: 20px;
+      border: none;
+      height: 25px;
+      background: #080807;
+      margin-bottom: 50px;
     }
-</style>
-    </style>
+
+    .image1 {
+      width: 30px;
+      height: 30px;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+
+    #flipText {
+      display: inline-block;
+      transition: all 0.4s ease;
+      color: #00F40A; /* Original green */
+    }
+
+    #flipText.flipped {
+      transform: rotate(180deg);
+      color: #B22222; /* Dark red */
+    }
+  </style>
 </head>
 <body>
-<center><b><h1>PRESS PLAY TO GET ↓RETARDED↓ </h1></b></center>
-<center>
-  <!-- Fix height and prevent audio layout shift -->
-  <div style="display: inline-block; height: 40px; overflow: hidden;">
-    <audio id="player" controls style="height: 40px;">
-      <source src="04retard.mp3" type="audio/mp3" />
-    </audio>
-  </div>
 
-  <!-- Upside-down arrow below the player -->
-  <div style="font-size: 50px; transform: rotate(180deg); margin-top: 10px; line-height: 1;">↓</div>
-<center>
-  <div style="display: inline-block; height: 40px; overflow: hidden;">
-    <audio id="player" controls style="height: 40px;">
-      <source src="04retard.mp3" type="audio/mp3" />
-    </audio>
-  </div>
+  <!-- Main heading with flipping target -->
+  <center>
+    <b>
+      <h1>
+        PRESS PLAY TO GET <span id="flipText">↓RETARDED↓</span>
+      </h1>
+    </b>
+  </center>
 
-  <div id="arrow" class="arrow">↓</div>
-</center>
+  <!-- Audio player -->
+  <center>
+    <div style="display: inline-block; height: 40px; overflow: hidden;">
+      <audio id="player" controls style="height: 40px;">
+        <source src="04retard.mp3" type="audio/mp3" />
+      </audio>
+    </div>
+  </center>
 
-<script>
-  const audio = document.getElementById('player');
-  const arrow = document.getElementById('arrow');
+  <!-- Script to flip the text on play -->
+  <script>
+    const audio = document.getElementById('player');
+    const flipText = document.getElementById('flipText');
 
-  audio.addEventListener('play', () => {
-    arrow.classList.add('flipped');
-  });
-</script>
+    audio.addEventListener('play', () => {
+      flipText.classList.add('flipped');
+    });
+  </script>
+
 </body>
 </html>
