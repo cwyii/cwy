@@ -73,14 +73,31 @@
   </center>
 
   <!-- Script to flip the text on play -->
-  <script>
-    const audio = document.getElementById('player');
-    const flipText = document.getElementById('flipText');
+    <script>
+  const audio = document.getElementById('player');
+  const flipText = document.getElementById('flipText');
+  const chaos = document.getElementById('chaos');
+  const symbols = ['🚬'];
 
-    audio.addEventListener('play', () => {
-      flipText.classList.add('flipped');
-    });
-  </script>
+  function createSymbol() {
+    const el = document.createElement('div');
+    el.className = 'symbol';
+    el.textContent = symbols[0];
+    el.style.left = Math.random() * window.innerWidth + 'px';
+    el.style.top = Math.random() * window.innerHeight + 'px';
+    el.style.animationDuration = (1 + Math.random() * 2) + 's';
+    chaos.appendChild(el);
+    setTimeout(() => el.remove(), 5000);
+  }
 
+  audio.addEventListener('play', () => {
+    flipText.classList.add('flipped');
+
+    // Launch 25 🚬
+    for (let i = 0; i < 25; i++) {
+      setTimeout(createSymbol, i * 100);
+    }
+  });
+</script>
 </body>
 </html>
