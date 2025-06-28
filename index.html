@@ -152,8 +152,12 @@
       const audioRect = audio.getBoundingClientRect();
       const discoRect = disco.getBoundingClientRect();
 
-      const startY = audioRect.top + audioRect.height / 2 + window.scrollY;
-      const endY = discoRect.top + discoRect.height / 2 + window.scrollY;
+      // Start from bottom center of audio
+      const startY = audioRect.bottom + window.scrollY;
+
+      // End at top center of disco ball
+      const endY = discoRect.top + window.scrollY;
+
       const height = endY - startY;
 
       beamLine.style.top = `${startY}px`;
@@ -165,7 +169,7 @@
       textContainer.classList.add('swap');
       disco.classList.add('active');
 
-      // Wait for disco animation before drawing line
+      // Wait for disco animation to start
       setTimeout(() => {
         updateBeamLine();
         beamLine.classList.add('active');
