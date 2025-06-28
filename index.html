@@ -38,7 +38,7 @@
       100% { color: red; }
     }
 
-    /* Swapping text lines */
+    /* Swapping lines */
     #textContainer {
       position: relative;
       height: 100px;
@@ -111,7 +111,7 @@
       width: 4px;
       background-color: #A9A9A9;
       transform: translateX(-50%);
-      z-index: 0; /* behind everything */
+      z-index: 0;
       opacity: 0;
       transition: opacity 0.5s ease;
     }
@@ -137,7 +137,7 @@
     <div id="discoBall">🪩</div>
   </div>
 
-  <!-- Beam line sits behind everything -->
+  <!-- Beam line -->
   <div id="beamLine"></div>
 
   <!-- JavaScript -->
@@ -160,21 +160,29 @@
       beamLine.style.height = `${height}px`;
     }
 
+    let beamTrackingInterval = null;
+
     audio.addEventListener('play', () => {
       flipText.classList.add('flipped');
       textContainer.classList.add('swap');
       disco.classList.add('active');
 
-      // Delay to allow disco to move before measuring
+      // Show beam line slightly after disco starts animating
       setTimeout(() => {
-        updateBeamLine();
         beamLine.classList.add('active');
-      }, 1000);
+        beamTrackingInterval = setInterval(updateBeamLine, 50);
+
+        // Stop tracking after ~2.5s
+        setTimeout(() => {
+          clearInterval(beamTrackingInterval);
+        }, 2500);
+      }, 300);
     });
 
     audio.addEventListener('ended', () => {
       disco.classList.remove('active');
       beamLine.classList.remove('active');
+      clearInterval(beamTrackingInterval);
     });
 
     window.addEventListener('resize', () => {
