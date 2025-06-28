@@ -71,7 +71,36 @@
   </style>
 </head>
 <body>
+#textContainer {
+  position: relative;
+  height: 100px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
 
+#line1, #line2 {
+  font-size: 36px;
+  transition: transform 0.8s ease;
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+#line1 {
+  top: 0;
+}
+
+#line2 {
+  top: 50px;
+}
+
+.swap #line1 {
+  transform: translateY(50px);
+}
+
+.swap #line2 {
+  transform: translateY(-50px);
+}
 <!-- Two lines stacked: "PRESS PLAY TO GET" and "⭣RETARDED⭣" -->
 <div id="textContainer">
   <div id="line1">PRESS PLAY TO GET</div>
