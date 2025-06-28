@@ -27,8 +27,8 @@
 
     #flipText.flipped {
       transform: rotate(180deg);
-      color: red;
       animation: customFlash 1s infinite;
+      text-shadow: 0 0 6px #FF0000, 0 0 10px #FF00FF, 0 0 14px #FF0000;
     }
 
     @keyframes customFlash {
@@ -39,33 +39,49 @@
       100% { color: red; }
     }
 
+    .audio-container {
+      position: relative;
+      z-index: 10;
+      display: inline-block;
+      height: 40px;
+    }
+
     .symbol {
       position: absolute;
       font-size: 40px;
       animation: spin 3s linear infinite;
       pointer-events: none;
+      z-index: 1;
     }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+
+    #chaos {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header with Thick Arrows -->
   <h1>PRESS PLAY TO GET <span id="flipText">⭣RETARDED⭣</span></h1>
 
-  <!-- Audio Player -->
-  <audio id="player" controls style="height: 40px;">
-    <source src="04retard.mp3" type="audio/mp3" />
-  </audio>
+  <div class="audio-container">
+    <audio id="player" controls style="height: 40px;">
+      <source src="04retard.mp3" type="audio/mp3" />
+    </audio>
+  </div>
 
-  <!-- Chaos Container -->
   <div id="chaos"></div>
 
-  <!-- Script -->
   <script>
     const audio = document.getElementById('player');
     const flipText = document.getElementById('flipText');
