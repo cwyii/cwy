@@ -3,101 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <title>LET'S GET RETARDED</title>
-  
-  <!-- Meta Tags -->
-  <meta name="title" content="CLANKERETARDED">
-  <meta property="og:image" content="JABBA.jpg">
-  <meta property="og:image:type" content="image/jpg">
-  <meta property="og:image:width" content="1080">
-  <meta property="og:image:height" content="1080">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Styles -->
   <style>
     body {
       background-color: #0D330A;
       color: #00F40A;
-      font-family: -apple-system, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: 'Comic Sans MS', Arial, sans-serif;
       text-align: center;
+      overflow: hidden;
+      margin: 0;
     }
 
-    hr {
-      position: relative;
-      top: 20px;
-      border: none;
-      height: 25px;
-      background: #080807;
-      margin-bottom: 50px;
-    }
-
-    .image1 {
-      width: 30px;
-      height: 30px;
-      display: block;
-      margin: 0 auto;
-      cursor: pointer;
+    h1 {
+      font-size: 36px;
     }
 
     #flipText {
       display: inline-block;
       transition: all 0.4s ease;
-      color: #00F40A; /* Original green */
+      color: #00F40A;
     }
 
     #flipText.flipped {
       transform: rotate(180deg);
-      color: #B22222; /* Dark red */
+      color: #B22222;
+      animation: rainbow 1s infinite;
+    }
+
+    @keyframes rainbow {
+      0% { color: red; }
+      20% { color: orange; }
+      40% { color: yellow; }
+      60% { color: green; }
+      80% { color: blue; }
+      100% { color: violet; }
+    }
+
+    .symbol {
+      position: absolute;
+      font-size: 40px;
+      animation: spin 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Main heading with flipping target -->
-  <center>
-    <b>
-      <h1>
-        PRESS PLAY TO GET <span id="flipText">↓RETARDED↓</span>
-      </h1>
-    </b>
-  </center>
+  <!-- Heading -->
+  <h1>PRESS PLAY TO GET <span id="flipText">↓RETARDED↓</span></h1>
 
-  <!-- Audio player -->
-  <center>
-    <div style="display: inline-block; height: 40px; overflow: hidden;">
-      <audio id="player" controls style="height: 40px;">
-        <source src="04retard.mp3" type="audio/mp3" />
-      </audio>
-    </div>
-  </center>
+  <!-- Audio Player -->
+  <audio id="player" controls style="height: 40px;">
+    <source src="04retard.mp3" type="audio/mp3" />
+  </audio>
 
-  <!-- Script to flip the text on play -->
-    <script>
-  const audio = document.getElementById('player');
-  const flipText = document.getElementById('flipText');
-  const chaos = document.getElementById('chaos');
-  const symbols = ['🚬'];
+  <!-- Chaos Container -->
+  <div id="chaos"></div>
 
-  function createSymbol() {
-    const el = document.createElement('div');
-    el.className = 'symbol';
-    el.textContent = symbols[0];
-    el.style.left = Math.random() * window.innerWidth + 'px';
-    el.style.top = Math.random() * window.innerHeight + 'px';
-    el.style.animationDuration = (1 + Math.random() * 2) + 's';
-    chaos.appendChild(el);
-    setTimeout(() => el.remove(), 5000);
-  }
+  <!-- Script -->
+  <script>
+    const audio = document.getElementById('player');
+    const flipText = document.getElementById('flipText');
+    const chaos = document.getElementById('chaos');
+    const symbols = ['🚬'];
 
-  audio.addEventListener('play', () => {
-    flipText.classList.add('flipped');
-
-    // Launch 25 🚬
-    for (let i = 0; i < 25; i++) {
-      setTimeout(createSymbol, i * 100);
+    function createSymbol() {
+      const el = document.createElement('div');
+      el.className = 'symbol';
+      el.textContent = symbols[0];
+      el.style.left = Math.random() * window.innerWidth + 'px';
+      el.style.top = Math.random() * window.innerHeight + 'px';
+      el.style.animationDuration = (1 + Math.random() * 2) + 's';
+      chaos.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
     }
-  });
-</script>
+
+    audio.addEventListener('play', () => {
+      flipText.classList.add('flipped');
+      for (let i = 0; i < 25; i++) {
+        setTimeout(createSymbol, i * 100);
+      }
+    });
+  </script>
+
 </body>
 </html>
