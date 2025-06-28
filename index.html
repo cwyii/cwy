@@ -15,7 +15,7 @@
       margin: 0;
     }
 
-    /* RETARDED line */
+    /* RETARDED text */
     #flipText {
       display: inline-block;
       transition: all 0.4s ease;
@@ -38,7 +38,7 @@
       100% { color: red; }
     }
 
-    /* Swapping text container */
+    /* Swapping lines container */
     #textContainer {
       position: relative;
       height: 100px;
@@ -70,13 +70,13 @@
       transform: translateY(-50px);
     }
 
-    /* Audio player */
+    /* Audio */
     .audio-container {
       position: relative;
       z-index: 10;
       display: inline-block;
       height: 40px;
-      margin-top: 10px; /* moved up */
+      margin-top: 10px;
     }
 
     /* Disco ball */
@@ -95,7 +95,7 @@
     }
 
     #discoBall.active {
-      top: 40vh; /* mid-way down */
+      top: 40vh;
       transform: translateX(-50%) scale(2.5);
       opacity: 1;
       animation: spinDisco 4s linear infinite;
@@ -106,22 +106,19 @@
       to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
     }
 
-    /* Beam line that stretches with disco */
+    /* Beam line */
     #beamLine {
       position: absolute;
-      top: 40px;
       left: 50%;
       width: 4px;
       background-color: #A9A9A9;
-      height: 0;
       transform: translateX(-50%);
-      z-index: 8;
-      transition: height 2s ease, opacity 1s ease;
+      z-index: 1; /* behind everything */
       opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
     #beamLine.active {
-      height: 30vh; /* stops halfway */
       opacity: 1;
     }
   </style>
@@ -134,7 +131,7 @@
     <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
   </div>
 
-  <!-- Audio + disco + line -->
+  <!-- Audio + disco + beam -->
   <div class="audio-container">
     <audio id="player" controls style="height: 40px;">
       <source src="04retard.mp3" type="audio/mp3" />
@@ -143,7 +140,7 @@
     <div id="beamLine"></div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- Script -->
   <script>
     const audio = document.getElementById('player');
     const flipText = document.getElementById('flipText');
@@ -151,16 +148,39 @@
     const disco = document.getElementById('discoBall');
     const beamLine = document.getElementById('beamLine');
 
+    function updateBeamLine() {
+      const audioRect = audio.getBoundingClientRect();
+      const discoRect = disco.getBoundingClientRect();
+
+      const startY = audioRect.top + audioRect.height / 2 + window.scrollY;
+      const endY = discoRect.top + discoRect.height / 2 + window.scrollY;
+      const height = endY - startY;
+
+      beamLine.style.top = `${startY}px`;
+      beamLine.style.height = `${height}px`;
+    }
+
     audio.addEventListener('play', () => {
       flipText.classList.add('flipped');
       textContainer.classList.add('swap');
       disco.classList.add('active');
-      beamLine.classList.add('active');
+
+      // Wait for disco animation before drawing line
+      setTimeout(() => {
+        updateBeamLine();
+        beamLine.classList.add('active');
+      }, 500);
     });
 
     audio.addEventListener('ended', () => {
       disco.classList.remove('active');
       beamLine.classList.remove('active');
+    });
+
+    window.addEventListener('resize', () => {
+      if (beamLine.classList.contains('active')) {
+        updateBeamLine();
+      }
     });
   </script>
 
