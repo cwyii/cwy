@@ -15,10 +15,6 @@
       margin: 0;
     }
 
-    h1 {
-      font-size: 36px;
-    }
-
     #flipText {
       display: inline-block;
       transition: all 0.4s ease;
@@ -34,7 +30,7 @@
     @keyframes customFlash {
       0% { color: red; }
       25% { color: lime; }
-      50% { color: #00ccff; }  /* bright blue */
+      50% { color: #00ccff; }
       75% { color: violet; }
       100% { color: red; }
     }
@@ -68,57 +64,64 @@
       z-index: 1;
       pointer-events: none;
     }
+
+    /* --- SLIDE-UP TEXT EFFECT --- */
+    #textContainer {
+      position: relative;
+      height: 100px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    #line1, #line2 {
+      font-size: 36px;
+      transition: transform 0.8s ease;
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
+
+    #line1 {
+      top: 0;
+    }
+
+    #line2 {
+      top: 50px;
+    }
+
+    .swap #line1 {
+      transform: translateY(50px);
+    }
+
+    .swap #line2 {
+      transform: translateY(-50px);
+    }
   </style>
 </head>
 <body>
-#textContainer {
-  position: relative;
-  height: 100px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
 
-#line1, #line2 {
-  font-size: 36px;
-  transition: transform 0.8s ease;
-  position: absolute;
-  width: 100%;
-  left: 0;
-}
+  <!-- Sliding Text Container -->
+  <div id="textContainer">
+    <div id="line1">PRESS PLAY TO GET</div>
+    <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
+  </div>
 
-#line1 {
-  top: 0;
-}
-
-#line2 {
-  top: 50px;
-}
-
-.swap #line1 {
-  transform: translateY(50px);
-}
-
-.swap #line2 {
-  transform: translateY(-50px);
-}
-<!-- Two lines stacked: "PRESS PLAY TO GET" and "⭣RETARDED⭣" -->
-<div id="textContainer">
-  <div id="line1">PRESS PLAY TO GET</div>
-  <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
-</div>
-
+  <!-- Audio Player -->
   <div class="audio-container">
     <audio id="player" controls style="height: 40px;">
       <source src="04retard.mp3" type="audio/mp3" />
     </audio>
   </div>
 
+  <!-- Chaos Container -->
   <div id="chaos"></div>
 
+  <!-- Script -->
   <script>
     const audio = document.getElementById('player');
     const flipText = document.getElementById('flipText');
     const chaos = document.getElementById('chaos');
+    const textContainer = document.getElementById('textContainer');
     const symbols = ['🚬'];
 
     function createSymbol() {
@@ -134,6 +137,8 @@
 
     audio.addEventListener('play', () => {
       flipText.classList.add('flipped');
+      textContainer.classList.add('swap');
+
       for (let i = 0; i < 25; i++) {
         setTimeout(createSymbol, i * 100);
       }
