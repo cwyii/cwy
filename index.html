@@ -15,6 +15,7 @@
       margin: 0;
     }
 
+    /* RETARDED line */
     #flipText {
       display: inline-block;
       transition: all 0.4s ease;
@@ -37,15 +38,7 @@
       100% { color: red; }
     }
 
-    .audio-container {
-      position: relative;
-      z-index: 10;
-      display: inline-block;
-      height: 40px;
-      margin-top: 30px;
-    }
-
-    /* Sliding text container */
+    /* Swapping text container */
     #textContainer {
       position: relative;
       height: 100px;
@@ -77,6 +70,15 @@
       transform: translateY(-50px);
     }
 
+    /* Audio player */
+    .audio-container {
+      position: relative;
+      z-index: 10;
+      display: inline-block;
+      height: 40px;
+      margin-top: 10px; /* moved up */
+    }
+
     /* Disco ball */
     #discoBall {
       position: absolute;
@@ -93,7 +95,7 @@
     }
 
     #discoBall.active {
-      top: 70vh;
+      top: 40vh; /* mid-way down */
       transform: translateX(-50%) scale(2.5);
       opacity: 1;
       animation: spinDisco 4s linear infinite;
@@ -104,13 +106,13 @@
       to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
     }
 
-    /* Vertical line from audio to disco ball */
+    /* Beam line that stretches with disco */
     #beamLine {
       position: absolute;
       top: 40px;
       left: 50%;
       width: 4px;
-      background-color: #A9A9A9;
+      background-color: #00F40A;
       height: 0;
       transform: translateX(-50%);
       z-index: 8;
@@ -119,20 +121,20 @@
     }
 
     #beamLine.active {
-      height: 60vh;
+      height: 30vh; /* stops halfway */
       opacity: 1;
     }
   </style>
 </head>
 <body>
 
-  <!-- Sliding Text -->
+  <!-- Headings -->
   <div id="textContainer">
     <div id="line1">PRESS PLAY TO GET</div>
     <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
   </div>
 
-  <!-- Audio + Disco Ball + Beam -->
+  <!-- Audio + disco + line -->
   <div class="audio-container">
     <audio id="player" controls style="height: 40px;">
       <source src="04retard.mp3" type="audio/mp3" />
