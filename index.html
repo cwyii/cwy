@@ -44,29 +44,6 @@
       height: 40px;
     }
 
-    .symbol {
-      position: absolute;
-      font-size: 40px;
-      animation: spin 3s linear infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    #chaos {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 1;
-      pointer-events: none;
-    }
-
     /* Text slide container */
     #textContainer {
       position: relative;
@@ -98,28 +75,30 @@
     .swap #line2 {
       transform: translateY(-50px);
     }
+
+    /* Disco ball emoji */
     #discoBall {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.5);
-  font-size: 40px;
-  opacity: 0;
-  z-index: 9;
-  transition: top 2s ease, transform 2s ease, opacity 1s ease;
-}
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.5);
+      font-size: 40px;
+      opacity: 0;
+      z-index: 9;
+      transition: top 2s ease, transform 2s ease, opacity 1s ease;
+    }
 
-#discoBall.active {
-  top: 80px;
-  transform: translateX(-50%) scale(2.5);
-  opacity: 1;
-  animation: spinDisco 4s linear infinite;
-}
+    #discoBall.active {
+      top: 80px;
+      transform: translateX(-50%) scale(2.5);
+      opacity: 1;
+      animation: spinDisco 4s linear infinite;
+    }
 
-@keyframes spinDisco {
-  from { transform: translateX(-50%) scale(2.5) rotate(0deg); }
-  to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
-}
+    @keyframes spinDisco {
+      from { transform: translateX(-50%) scale(2.5) rotate(0deg); }
+      to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -130,7 +109,7 @@
     <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
   </div>
 
-  <!-- Audio Player -->
+  <!-- Audio Player and Disco Ball -->
   <div class="audio-container">
     <audio id="player" controls style="height: 40px;">
       <source src="04retard.mp3" type="audio/mp3" />
@@ -138,64 +117,23 @@
     <div id="discoBall">🪩</div>
   </div>
 
-  <!-- Cigarette chaos container -->
-  <div id="chaos"></div>
-
   <!-- Script -->
   <script>
-  const audio = document.getElementById('player');
-  const flipText = document.getElementById('flipText');
-  const chaos = document.getElementById('chaos');
-  const textContainer = document.getElementById('textContainer');
-  const disco = document.getElementById('discoBall');
-  const symbols = ['🚬'];
+    const audio = document.getElementById('player');
+    const flipText = document.getElementById('flipText');
+    const textContainer = document.getElementById('textContainer');
+    const disco = document.getElementById('discoBall');
 
-  function createSymbol() {
-    const el = document.createElement('div');
-    el.className = 'symbol';
-    el.textContent = symbols[0];
-    el.style.left = Math.random() * window.innerWidth + 'px';
-    el.style.top = Math.random() * window.innerHeight + 'px';
-    el.style.animationDuration = (1 + Math.random() * 2) + 's';
-    chaos.appendChild(el);
-    setTimeout(() => el.remove(), 5000);
-  }
+    audio.addEventListener('play', () => {
+      flipText.classList.add('flipped');
+      textContainer.classList.add('swap');
+      disco.classList.add('active');
+    });
 
-  audio.addEventListener('play', () => {
-    flipText.classList.add('flipped');
-    textContainer.classList.add('swap');
-    disco.classList.add('active');
+    audio.addEventListener('ended', () => {
+      disco.classList.remove('active');
+    });
+  </script>
 
-    for (let i = 0; i < 25; i++) {
-      setTimeout(createSymbol, i * 100);
-    }
-  });
-
-  audio.addEventListener('ended', () => {
-    disco.classList.remove('active');
-  });
-</script>
-#discoBall {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.5);
-  font-size: 40px;
-  opacity: 0;
-  z-index: 9;
-  transition: top 2s ease, transform 2s ease, opacity 1s ease;
-}
-
-#discoBall.active {
-  top: 80px;
-  transform: translateX(-50%) scale(2.5);
-  opacity: 1;
-  animation: spinDisco 4s linear infinite;
-}
-
-@keyframes spinDisco {
-  from { transform: translateX(-50%) scale(2.5) rotate(0deg); }
-  to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
-}
 </body>
 </html>
