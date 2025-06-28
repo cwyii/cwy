@@ -98,6 +98,28 @@
     .swap #line2 {
       transform: translateY(-50px);
     }
+    #discoBall {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+  font-size: 40px;
+  opacity: 0;
+  z-index: 9;
+  transition: top 2s ease, transform 2s ease, opacity 1s ease;
+}
+
+#discoBall.active {
+  top: 80px;
+  transform: translateX(-50%) scale(2.5);
+  opacity: 1;
+  animation: spinDisco 4s linear infinite;
+}
+
+@keyframes spinDisco {
+  from { transform: translateX(-50%) scale(2.5) rotate(0deg); }
+  to   { transform: translateX(-50%) scale(2.5) rotate(360deg); }
+}
   </style>
 </head>
 <body>
