@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>LET'S GET RETARDED</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
@@ -31,14 +31,14 @@
     }
 
     @keyframes customFlash {
-      0% { color: red; }
-      25% { color: lime; }
-      50% { color: #00ccff; }
-      75% { color: violet; }
+      0%   { color: red; }
+      25%  { color: lime; }
+      50%  { color: #00ccff; }
+      75%  { color: violet; }
       100% { color: red; }
     }
 
-    /* Swapping text */
+    /* Swapping text lines */
     #textContainer {
       position: relative;
       height: 100px;
@@ -111,7 +111,7 @@
       width: 4px;
       background-color: #A9A9A9;
       transform: translateX(-50%);
-      z-index: 1;
+      z-index: 0; /* behind everything */
       opacity: 0;
       transition: opacity 0.5s ease;
     }
@@ -129,7 +129,7 @@
     <div id="line2"><span id="flipText">⭣RETARDED⭣</span></div>
   </div>
 
-  <!-- Audio player & disco ball -->
+  <!-- Audio + Disco Ball -->
   <div class="audio-container">
     <audio id="player" controls style="height: 40px;">
       <source src="04retard.mp3" type="audio/mp3" />
@@ -137,7 +137,7 @@
     <div id="discoBall">🪩</div>
   </div>
 
-  <!-- Beam line (outside audio container!) -->
+  <!-- Beam line sits behind everything -->
   <div id="beamLine"></div>
 
   <!-- JavaScript -->
@@ -152,8 +152,8 @@
       const audioRect = audio.getBoundingClientRect();
       const discoRect = disco.getBoundingClientRect();
 
-      const startY = audioRect.bottom + window.scrollY;
-      const endY = discoRect.top + window.scrollY;
+      const startY = audioRect.top + (audioRect.height / 2) + window.scrollY;
+      const endY = discoRect.top + (discoRect.height / 2) + window.scrollY;
       const height = endY - startY;
 
       beamLine.style.top = `${startY}px`;
@@ -165,10 +165,11 @@
       textContainer.classList.add('swap');
       disco.classList.add('active');
 
+      // Delay to allow disco to move before measuring
       setTimeout(() => {
         updateBeamLine();
         beamLine.classList.add('active');
-      }, 1000); // wait for disco to move
+      }, 1000);
     });
 
     audio.addEventListener('ended', () => {
