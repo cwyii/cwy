@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>LET'S GET RETARDED</title>
-
-  <!-- Meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Styles -->
   <style>
     body {
       background-color: #0D330A;
@@ -30,17 +27,16 @@
 
     #flipText.flipped {
       transform: rotate(180deg);
-      color: #B22222;
-      animation: rainbow 1s infinite;
+      color: red;
+      animation: customFlash 1s infinite;
     }
 
-    @keyframes rainbow {
+    @keyframes customFlash {
       0% { color: red; }
-      20% { color: orange; }
-      40% { color: yellow; }
-      60% { color: green; }
-      80% { color: blue; }
-      100% { color: violet; }
+      25% { color: lime; }
+      50% { color: #00ccff; }  /* bright blue */
+      75% { color: violet; }
+      100% { color: red; }
     }
 
     .symbol {
@@ -58,8 +54,8 @@
 </head>
 <body>
 
-  <!-- Heading -->
-  <h1>PRESS PLAY TO GET <span id="flipText">↓RETARDED↓</span></h1>
+  <!-- Header with Thick Arrows -->
+  <h1>PRESS PLAY TO GET <span id="flipText">⭣RETARDED⭣</span></h1>
 
   <!-- Audio Player -->
   <audio id="player" controls style="height: 40px;">
